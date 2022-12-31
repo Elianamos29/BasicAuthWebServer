@@ -18,8 +18,11 @@
 
 import java.io.*;                                         
 import java.net.*;                                        
-import java.util.*;                                       
-import sun.misc.BASE64Decoder;
+import java.util.*;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
+
 /*This will be used to pause between failed requests*/
 import java.util.concurrent.TimeUnit;
 
@@ -334,7 +337,7 @@ class Credentials {
     private String dUsername;
     private String dPassword;
     public Credentials(String authString) throws Exception {
-	authString = new String((new sun.misc.BASE64Decoder().decodeBuffer(authString)));
+
 	StringTokenizer st = new StringTokenizer(authString, ":");
 	dUsername = st.nextToken();
 	dPassword = st.nextToken();
