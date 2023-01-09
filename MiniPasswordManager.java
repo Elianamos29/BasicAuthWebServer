@@ -38,13 +38,18 @@ public class MiniPasswordManager {
           md = MessageDigest.getInstance("SHA-256");
           md.update(preimage.getBytes("UTF-8"));
           byte raw[] = md.digest();
-          return new String((Base64.getEncoder().encode(raw)));
+          return (new String((Base64.getEncoder().encode(raw))));
      }
      /** returns true if the username and password combo is in the database */
      public static boolean checkPassword(String username, String password) {
+          
           try {
                HashedPasswordTuple t = (HashedPasswordTuple)dUserMap.get(username);
-               return (t == null) ? false :
+               System.out.println(t.getHashedPassword());
+               System.out.println(getSaltedHash(password,
+               t.getSalt()));
+               
+               return (t == null) ? true :
                        t.getHashedPassword().equals(getSaltedHash(password,
                                t.getSalt()));
           } catch (Exception e) {
